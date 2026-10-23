@@ -6,7 +6,8 @@
 <p align="center">
   <a href="https://github.com/BlisFPS/organizer/releases/latest/download/Organizer-Setup.exe"><b>⬇ Download for Windows</b></a> ·
   <a href="https://blisfps.github.io/organizer/">Website</a> ·
-  <a href="https://github.com/BlisFPS/organizer/issues/new?template=feedback.yml">Give feedback</a>
+  <a href="https://github.com/BlisFPS/organizer/issues/new?template=feedback.yml">Give feedback</a> ·
+  <a href="https://discord.gg/ZYxPr8K5RZ">Discord</a>
 </p>
 
 ![Organizer overview](assets/screenshots/overview.png)
@@ -19,7 +20,7 @@ Organizer is a personal project and still in beta. I'd really like to know what 
 - Which modules do you use, and which are missing?
 - Did you find a bug?
 
-👉 **[Share your feedback](https://github.com/BlisFPS/organizer/issues/new?template=feedback.yml)**. I read every single one.
+👉 **[Share your feedback](https://github.com/BlisFPS/organizer/issues/new?template=feedback.yml)** or **[join the Discord](https://discord.gg/ZYxPr8K5RZ)** and chat with me directly. I read every single message.
 
 ## ✨ Features
 
