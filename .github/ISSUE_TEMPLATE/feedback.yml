@@ -1,0 +1,39 @@
+name: 💬 Feedback
+description: Tell me what you think about the Organizer beta
+title: "[Feedback] "
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for trying the Organizer beta! Every answer helps. Fill in only what you want to.
+  - type: dropdown
+    id: rating
+    attributes:
+      label: Overall, how do you like it?
+      options:
+        - ⭐⭐⭐⭐⭐ Love it
+        - ⭐⭐⭐⭐ Good
+        - ⭐⭐⭐ Okay
+        - ⭐⭐ Not really
+        - ⭐ Not for me
+  - type: textarea
+    id: like
+    attributes:
+      label: What do you like?
+  - type: textarea
+    id: improve
+    attributes:
+      label: What is confusing, annoying or missing?
+  - type: textarea
+    id: bug
+    attributes:
+      label: Did you find a bug? (What did you do, what happened?)
+  - type: input
+    id: modules
+    attributes:
+      label: Which modules do you use most?
+  - type: input
+    id: version
+    attributes:
+      label: App version and Windows version
+      placeholder: e.g. 2.0.0 on Windows 11

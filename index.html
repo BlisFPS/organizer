@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Organizer — Your life. One place.</title>
+<meta name="description" content="Organizer is a free, offline-first desktop app for Windows that brings tasks, calendar, notes, habits, goals, finances and 30+ more modules into one place. Currently in beta.">
+<link rel="icon" href="assets/logo.png">
+<style>
+  :root{
+    --bg:#0b0d17; --bg2:#10132a; --card:rgba(255,255,255,.045); --line:rgba(255,255,255,.09);
+    --text:#eceefb; --muted:#a3a8c7; --accent:#7c6cff; --accent2:#2dd4bf; --pink:#e0559b; --warn:#fbbf24;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(600px 400px at 10% 0%,rgba(124,108,255,.28),transparent 70%),
+               radial-gradient(500px 400px at 95% 20%,rgba(45,212,191,.16),transparent 70%),
+               radial-gradient(600px 500px at 50% 100%,rgba(224,85,155,.12),transparent 70%)}
+  a{color:var(--accent2)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--text);text-decoration:none}
+  .brand img{width:32px;height:32px;border-radius:8px}
+  .badge{font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 8px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff}
+  nav .links a{color:var(--muted);text-decoration:none;margin-left:20px;font-size:14px}
+  nav .links a:hover{color:var(--text)}
+  header.hero{text-align:center;padding:56px 0 32px}
+  .hero img.logo{width:96px;height:96px;border-radius:24px;box-shadow:0 10px 40px rgba(124,108,255,.35)}
+  h1{font-size:clamp(34px,6vw,58px);line-height:1.08;margin:20px 0 12px;letter-spacing:-.02em}
+  h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{font-size:clamp(16px,2.2vw,19px);color:var(--muted);max-width:640px;margin:0 auto 28px}
+  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:14px;font-weight:650;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),#5b8cff);color:#fff;box-shadow:0 8px 30px rgba(124,108,255,.4)}
+  .btn.ghost{border:1px solid var(--line);color:var(--text);background:var(--card)}
+  .meta{margin-top:14px;font-size:13px;color:var(--muted)}
+  .shot{margin:44px auto 0;max-width:960px;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .shot img{display:block;width:100%;height:auto}
+  section{padding:64px 0 8px}
+  h2{font-size:clamp(26px,4vw,36px);margin:0 0 8px;letter-spacing:-.01em}
+  .sub{color:var(--muted);margin:0 0 28px;max-width:720px}
+  .beta{border:1px solid rgba(251,191,36,.35);background:linear-gradient(135deg,rgba(251,191,36,.10),rgba(124,108,255,.08));border-radius:20px;padding:28px}
+  .beta h2{display:flex;align-items:center;gap:10px}
+  .beta ul{margin:12px 0 20px;padding-left:20px;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .card .ic{font-size:24px}
+  .card h3{margin:8px 0 6px;font-size:17px}
+  .card p{margin:0;color:var(--muted);font-size:14.5px}
+  .mods{display:flex;flex-wrap:wrap;gap:8px}
+  .mods span{padding:7px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:14px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+  .two img{width:100%;border-radius:14px;border:1px solid var(--line)}
+  .list{margin:0;padding:0;list-style:none}
+  .list li{padding:10px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+  .list li b{color:var(--text)}
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  td,th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600}
+  ol.steps{padding-left:20px;color:var(--muted)} ol.steps li{margin-bottom:8px} ol.steps b{color:var(--text)}
+  details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:10px}
+  summary{cursor:pointer;font-weight:600}
+  details p{color:var(--muted);margin:10px 0 0}
+  footer{padding:56px 0 40px;text-align:center;color:var(--muted);font-size:14px}
+  .final{text-align:center;padding:64px 0 16px}
+  @media(max-width:760px){.two{grid-template-columns:1fr}nav .links{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#"><img src="assets/logo.png" alt="">Organizer <span class="badge">BETA</span></a>
+    <div class="links"><a href="#features">Features</a><a href="#privacy">Privacy</a><a href="#install">Install</a><a href="#feedback">Feedback</a></div>
+  </nav>
+
+  <header class="hero">
+    <img class="logo" src="assets/logo.png" alt="Organizer logo">
+    <h1>Your life. <span>One place.</span></h1>
+    <p class="lead">Organizer is a desktop app for Windows that brings your tasks, calendar, notes, habits, goals, finances and more than 30 other tools together in one beautiful app. It works fully offline, and your data never leaves your computer.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/BlisFPS/organizer/releases/latest/download/Organizer-Setup.exe">⬇ Download for Windows</a>
+      <a class="btn ghost" href="#feedback">💬 Give feedback</a>
+    </div>
+    <div class="meta">Version 2.0.0 Beta · Windows 10 / 11 (64-bit) · ~96 MB · Free</div>
+    <div class="shot"><img src="assets/screenshots/overview.png" alt="Organizer overview with tasks, day plan and calendar" width="800" height="500"></div>
+  </header>
+
+  <section id="feedback">
+    <div class="beta">
+      <h2>🧪 This is a beta, and I need your opinion</h2>
+      <p class="sub" style="margin-bottom:0">Organizer is a personal project that I've been building and improving almost every day. Before the full release I'd love to know what real people think. Every bit of feedback helps, whether it's a small bug or a big idea.</p>
+      <ul>
+        <li>What do you like? What feels confusing or unnecessary?</li>
+        <li>Which modules do you actually use, and which are missing?</li>
+        <li>Did you find a bug, a typo or something that looks off?</li>
+        <li>Would you use it every day? Why or why not?</li>
+      </ul>
+      <div class="cta" style="justify-content:flex-start">
+        <a class="btn primary" href="https://github.com/BlisFPS/organizer/issues/new?template=feedback.yml">Share your feedback</a>
+        <a class="btn ghost" href="https://github.com/BlisFPS/organizer/issues">See what others said</a>
+      </div>
+      <p class="meta" style="margin-top:12px">Feedback is collected via GitHub Issues (a free GitHub account is needed). Being a beta, some things may still change or break, so please export a backup from time to time.</p>
+    </div>
+  </section>
+
+  <section id="features">
+    <h2>Everything you need, nothing you don't</h2>
+    <p class="sub">Start with a profile, for example Everyday, Fitness, Studies, Household, Travel, Business or Content creator, and only turn on the modules you actually need. You can create as many profiles as you want and switch between them at any time.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">✅</div><h3>Tasks & day planner</h3><p>Quick-add tasks with priorities and due dates. Your day shows tasks and appointments on one timeline.</p></div>
+      <div class="card"><div class="ic">📅</div><h3>Calendar</h3><p>Month view, appointments and countdowns. Export events as .ics to any other calendar.</p></div>
+      <div class="card"><div class="ic">📝</div><h3>Notes & whiteboard</h3><p>Colorful notes with checklists, #tags, links between notes and folders, plus a free-form whiteboard.</p></div>
+      <div class="card"><div class="ic">🎯</div><h3>Goals & habits</h3><p>Set goals, track daily habits and streaks, and see your progress over time.</p></div>
+      <div class="card"><div class="ic">💰</div><h3>Finances</h3><p>Keep an eye on accounts, subscriptions and savings goals, plus a watchlist for stocks.</p></div>
+      <div class="card"><div class="ic">🏋️</div><h3>Health & fitness</h3><p>Workouts, training plans, body goals, water intake, medication reminders and Strava import.</p></div>
+      <div class="card"><div class="ic">🤖</div><h3>AI assistant</h3><p>Ask about your day, plan your week or create tasks by chatting. Works with Claude or OpenAI using your own API key. It's optional.</p></div>
+      <div class="card"><div class="ic">🔐</div><h3>Password vault</h3><p>Store logins locally behind a master password.</p></div>
+      <div class="card"><div class="ic">📊</div><h3>Analytics</h3><p>See how productive you are, what you finished and where your time goes.</p></div>
+      <div class="card"><div class="ic">🎨</div><h3>Make it yours</h3><p>Several designs, day and night mode, customizable widgets on the overview and a global search (Ctrl + K).</p></div>
+      <div class="card"><div class="ic">🌍</div><h3>4 languages</h3><p>English, German, French and Spanish, switchable at any time.</p></div>
+      <div class="card"><div class="ic">⚡</div><h3>Fast & offline</h3><p>No account, no loading spinners, no internet needed. Everything saves instantly.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>37 modules, turn on what you need</h2>
+    <p class="sub">Each profile only shows the modules you pick. Here's the full list:</p>
+    <div class="mods">
+      <span>Overview</span><span>Tasks</span><span>Calendar</span><span>Day planner</span><span>Notes</span><span>Whiteboard</span><span>Lists</span><span>Goals</span><span>Habits</span><span>Projects</span><span>Brain</span><span>Analytics</span><span>Birthdays</span><span>Countdowns</span><span>Pomodoro</span><span>Clock</span><span>Calculator</span><span>Finances</span><span>Watchlist</span><span>Jobs</span><span>Clients & CRM</span><span>Content</span><span>Links & News</span><span>Passwords</span><span>PDF Studio</span><span>Files</span><span>Health</span><span>Fitness</span><span>Medication</span><span>Water</span><span>School</span><span>Household</span><span>Shopping list</span><span>Vehicles</span><span>Travel</span><span>Packing lists</span><span>Collections</span>
+    </div>
+    <div class="two" style="margin-top:28px">
+      <img src="assets/screenshots/modules.png" alt="All modules overview" width="800" height="500" loading="lazy">
+      <img src="assets/screenshots/notes.png" alt="Notes module" width="800" height="500" loading="lazy">
+    </div>
+  </section>
+
+  <section>
+    <h2>Built for the desktop</h2>
+    <p class="sub">Organizer is a real Windows app, so it can do things a website can't:</p>
+    <ul class="list">
+      <li><b>🛡 Automatic backups:</b> every change is saved as a file in <code>Documents/Organizer-Backups</code>, with one snapshot per day kept for 30 days.</li>
+      <li><b>⏰ Reminders in the background:</b> appointments and deadlines show up as Windows notifications even when the window is closed.</li>
+      <li><b>📌 System tray & autostart:</b> closing the window keeps Organizer running in the tray, and it can start together with Windows if you like.</li>
+      <li><b>📁 Files:</b> browse, preview and open files from your Documents, Downloads, Pictures and more right inside the app.</li>
+      <li><b>🖥 Screen time:</b> see which programs you spend your time in, next to a time clock and productivity stats.</li>
+      <li><b>🪟 Pop-out windows:</b> detach any module into its own window, keep it always on top and adjust its opacity.</li>
+      <li><b>🌤 Weather:</b> current weather and forecast for your city.</li>
+    </ul>
+  </section>
+
+  <section id="privacy">
+    <h2>Your data stays yours</h2>
+    <p class="sub">No account, no cloud and no tracking. Organizer stores everything locally on your computer.</p>
+    <table>
+      <tr><th style="width:34%">What</th><th>How it's handled</th></tr>
+      <tr><td>Your tasks, notes, events etc.</td><td>Saved only on your computer. Nothing is uploaded and there is no Organizer server.</td></tr>
+      <tr><td>Backups</td><td>Plain JSON files in your Documents folder. You can export everything and import it again at any time (Settings → Export all / Import).</td></tr>
+      <tr><td>Analytics / telemetry</td><td>None. The app does not collect or send usage data.</td></tr>
+      <tr><td>AI assistant (optional)</td><td>Only active if you add your own Claude or OpenAI API key. The key is encrypted by Windows, and your questions go directly to the provider you chose.</td></tr>
+      <tr><td>Online extras (optional)</td><td>Weather (Open-Meteo), maps (OpenStreetMap) and stock quotes only contact those services when you use them.</td></tr>
+      <tr><td>Uninstalling</td><td>Your data is kept when you uninstall, so you can reinstall without losing anything.</td></tr>
+    </table>
+  </section>
+
+  <section id="install">
+    <h2>Install in a minute</h2>
+    <ol class="steps">
+      <li><b>Download</b> <a href="https://github.com/BlisFPS/organizer/releases/latest/download/Organizer-Setup.exe">Organizer-Setup.exe</a>.</li>
+      <li><b>Run it.</b> Windows may show “Windows protected your PC” because the app isn't code-signed yet (signing certificates are expensive for a hobby project). Click <b>More info → Run anyway</b>.</li>
+      <li><b>Choose a folder</b> (or keep the default). The installer creates a desktop shortcut and a Start menu entry.</li>
+      <li><b>Pick a language and a profile</b>, and you're ready to go.</li>
+    </ol>
+    <p class="meta">Requirements: Windows 10 or 11, 64-bit, about 300 MB of free disk space. A macOS version may follow later.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>Is Organizer free?</summary><p>Yes, the beta is completely free.</p></details>
+    <details><summary>Do I need an internet connection?</summary><p>No. Everything works offline. Only optional extras like weather, maps, stock quotes or the AI assistant need a connection.</p></details>
+    <details><summary>Can I sync between two PCs?</summary><p>There's no built-in cloud sync yet. You can export your data on one PC and import it on another, or keep the backup folder inside OneDrive.</p></details>
+    <details><summary>Will my data survive updates?</summary><p>Yes. Updates replace only the app itself, not your data. To be safe during the beta, export a backup now and then.</p></details>
+    <details><summary>Found a bug or have an idea?</summary><p>Please <a href="https://github.com/BlisFPS/organizer/issues/new?template=feedback.yml">open a feedback issue</a>. I read every single one.</p></details>
+  </section>
+
+  <div class="final">
+    <h2>Ready to get organized?</h2>
+    <p class="sub" style="margin:0 auto 24px">Download the beta, try it for a few days and tell me what you think.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/BlisFPS/organizer/releases/latest/download/Organizer-Setup.exe">⬇ Download for Windows</a>
+      <a class="btn ghost" href="https://github.com/BlisFPS/organizer/issues/new?template=feedback.yml">💬 Give feedback</a>
+    </div>
+  </div>
+
+  <footer>Organizer · Beta 2.0.0 · Made by <a href="https://github.com/BlisFPS">BlisFPS</a> · <a href="https://github.com/BlisFPS/organizer/releases">All releases</a></footer>
+</div>
+</body>
+</html>
